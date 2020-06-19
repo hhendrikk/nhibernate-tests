@@ -28,7 +28,7 @@ namespace api
         {
             services.AddControllers();
             services.AddNHibernate(
-                configuration.GetValue<string>("ConnectionStrings:kelku"),
+                configuration.GetValue<string>("ConnectionStrings:connection"),
                 env);
         }
 
