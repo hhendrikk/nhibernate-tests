@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres_srv:
     image: postgres
-    container_name: postgres_db
+    container_name: postgres_db_1
     command:
       - 'postgres'
       - '-c'
@@ -21,7 +21,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin4
+    container_name: pgadmin4_1
     networks:
       - development
     ports:
