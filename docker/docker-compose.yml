@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgres_srv:
+    image: postgres
+    container_name: postgres_db
+    command:
+      - 'postgres'
+      - '-c'
+      - 'max_connections=1000'
+      - '-c'
+      - 'shared_buffers=3GB'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - development
+    environment:
+      POSTGRES_PASSWORD: 'password'
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    networks:
+      - development
+    ports:
+      - 8080:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'admin@admin'
+      PGADMIN_DEFAULT_PASSWORD: 'password'
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+      PGADMIN_CONFIG_LOGIN_BANNER: '"Authorised users only!"'
+
+volumes:
+  db-data:
+    external: true
+
+networks:
+  development:
+    driver: bridge
