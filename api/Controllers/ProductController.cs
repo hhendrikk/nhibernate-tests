@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using api.Entities;
 using api.Model;
@@ -40,11 +41,12 @@ namespace api.Controllers
                 await session.SaveAsync(movie);
             }
 
-            IList<Product> products;
+            IList<Book> products;
 
             using (var session = sessionFactory.OpenSession())
             {
-                products = await session.CreateQuery("from Product").ListAsync<Product>();
+                products = session.Query<Book>()
+                    .ToList();
             }
 
             return Ok(products);

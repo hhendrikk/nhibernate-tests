@@ -4,6 +4,13 @@ namespace api.Entities
     {
         public virtual string ISBN { get; protected set; }
         public virtual string Author { get; protected set; }
+        public override ProductType ProductType
+        {
+            get
+            {
+                return ProductType.Book;
+            }
+        }
 
         protected Book() { }
 

@@ -7,6 +7,7 @@ namespace api.Entities
         public virtual string Name { get; protected set; }
         public virtual string Description { get; protected set; }
         public virtual decimal UnitPrice { get; protected set; }
+        public virtual ProductType ProductType { get; protected set; }
 
         protected Product() { }
 

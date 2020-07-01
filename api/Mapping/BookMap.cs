@@ -9,7 +9,7 @@ namespace api.Mapping
     {
         public BookMap()
         {
-            DiscriminatorValue(ProductType.Book.GetHashCode());
+            DiscriminatorValue(ProductType.Book);
 
             Property(p => p.Author, m =>
             {

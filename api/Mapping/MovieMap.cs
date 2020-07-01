@@ -9,7 +9,7 @@ namespace api.Mapping
     {
         public MovieMap()
         {
-            DiscriminatorValue(ProductType.Movie.GetHashCode());
+            DiscriminatorValue(ProductType.Movie);
 
             Property(p => p.Director, m =>
             {

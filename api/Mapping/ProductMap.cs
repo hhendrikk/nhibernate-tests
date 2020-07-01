@@ -14,8 +14,10 @@ namespace api.Mapping
 
             Discriminator(p => p.Column("productType"));
 
-            NaturalId(map => {
-                map.Property(p => p.Name, m => {
+            NaturalId(map =>
+            {
+                map.Property(p => p.Name, m =>
+                {
                     m.NotNullable(true);
                 });
             }, x => x.Mutable(true));
