@@ -6,16 +6,19 @@ using NHibernate.Type;
 
 namespace api.Mapping
 {
-    public class ProductMap : ClassMapping<Product>
+    public class ProductMap : EntityMap<Product>
     {
         public ProductMap()
         {
-            Id(p => p.Id, m =>
-            {
-                m.Column("id");
-                m.Type<Int64Type>();
-                m.Generator(Generators.Native);
-            });
+            Table("Product");
+
+            Discriminator(p => p.Column("productType"));
+
+            NaturalId(map => {
+                map.Property(p => p.Name, m => {
+                    m.NotNullable(true);
+                });
+            }, x => x.Mutable(true));
 
             Property(p => p.Name, m =>
             {

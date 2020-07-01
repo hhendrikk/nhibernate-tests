@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres_srv:
     image: postgres
-    container_name: postgres_db_1
+    container_name: postgres_database
     command:
       - 'postgres'
       - '-c'
@@ -11,7 +11,7 @@ services:
       - '-c'
       - 'shared_buffers=3GB'
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
@@ -21,7 +21,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin4_1
+    container_name: pgadmin_database
     networks:
       - development
     ports:
@@ -33,7 +33,7 @@ services:
       PGADMIN_CONFIG_LOGIN_BANNER: '"Authorised users only!"'
 
 volumes:
-  db-data:
+  database:
     external: true
 
 networks:

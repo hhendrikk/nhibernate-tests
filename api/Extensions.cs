@@ -1,4 +1,5 @@
 using api.Entities;
+using api.Mapping;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,7 +17,10 @@ namespace api
             this IServiceCollection services, string connectionString,
             IWebHostEnvironment env)
         {
-            var config = new Configuration().DataBaseIntegration(db =>
+            var config = new Configuration();
+            config.SetNamingStrategy(new PostgreSqlNamingStrategy());
+
+            config.DataBaseIntegration(db =>
             {
                 db.Dialect<PostgreSQL83Dialect>();
                 db.ConnectionString = connectionString;
@@ -41,7 +45,7 @@ namespace api
             {
                 new SchemaExport(config)
                     .SetOutputFile("db.sql")
-                    .Execute(false, false, false);
+                    .Execute(false, true, false);
 
                 NHibernateLogger.SetLoggersFactory(
                     new NHibernate.Logging.Serilog.SerilogLoggerFactory());
