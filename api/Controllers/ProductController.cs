@@ -35,21 +35,31 @@ namespace api.Controllers
                 director: "Oliver Nakache"
             );
 
+            var customer = new Customer(
+                name: "Max weinberg",
+                billingAddress: new Address("line", "city", "state", "zipCode"),
+                shippingAddress: new Address("line1", "city2", "state3", "zipCode4")
+            );
+
             using (var session = sessionFactory.OpenSession())
             {
                 await session.SaveAsync(book);
                 await session.SaveAsync(movie);
+                await session.SaveAsync(customer);
             }
 
             IList<Book> products;
+            Customer customerQuery;
 
             using (var session = sessionFactory.OpenSession())
             {
                 products = session.Query<Book>()
                     .ToList();
+
+                customerQuery = session.QueryOver<Customer>().SingleOrDefault();
             }
 
-            return Ok(products);
+            return Ok(customerQuery);
         }
     }
 }
